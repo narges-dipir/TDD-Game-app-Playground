@@ -9,6 +9,8 @@ class Game(highest: Int) {
 
     fun incrementScore() {
         currentScore++
-        highScore++
+        if (currentScore > highScore) {
+            highScore++
+        }
     }
 }
