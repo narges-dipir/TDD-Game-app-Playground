@@ -11,4 +11,12 @@ class GameUnitTests {
         game.incrementScore()
         assertEquals(1, game.currentScore)
     }
+
+    @Test
+    fun `when incrementing score above highScore should also increment highScore`() {
+        val game = Game()
+        game.incrementScore()
+        assertEquals(1, game.highScore)
+    }
+
 }
