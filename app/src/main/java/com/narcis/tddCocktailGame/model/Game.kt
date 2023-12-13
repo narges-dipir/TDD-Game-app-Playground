@@ -9,5 +9,6 @@ class Game {
 
     fun incrementScore() {
         currentScore++
+        highScore++
     }
 }
