@@ -7,16 +7,23 @@ class GameUnitTests {
 
     @Test
     fun `when incrementing score should increment current score`() {
-        val game = Game()
+        val game = Game(0)
         game.incrementScore()
         assertEquals(1, game.currentScore)
     }
 
     @Test
     fun `when incrementing score above highScore should also increment highScore`() {
-        val game = Game()
+        val game = Game(0)
         game.incrementScore()
         assertEquals(1, game.highScore)
+    }
+
+    @Test
+    fun `when incrementing score below highScore should not increment high score`(){
+        val game = Game(10)
+        game.incrementScore()
+        assertEquals(10, game.highScore)
     }
 
 }

@@ -1,10 +1,10 @@
 package com.narcis.tddCocktailGame.model
 
-class Game {
+class Game(highest: Int) {
     var currentScore = 0
         private set
 
-    var highScore = 0
+    var highScore = highest
         private set
 
     fun incrementScore() {
