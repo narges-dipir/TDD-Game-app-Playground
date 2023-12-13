@@ -1,4 +1,4 @@
-package com.narcis.tdd_cocktail_game
+package com.narcis.tddCocktailGame
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.narcis.tdd_cocktail_game.ui.theme.Tdd_cocktail_gameTheme
+import com.narcis.tddCocktailGame.ui.theme.Tdd_cocktail_gameTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

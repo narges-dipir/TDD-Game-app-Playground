@@ -1,4 +1,4 @@
-package com.narcis.tdd_cocktail_game
+package com.narcis.tddCocktailGame
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

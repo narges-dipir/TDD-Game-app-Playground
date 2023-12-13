@@ -1,4 +1,4 @@
-package com.narcis.tdd_cocktail_game.ui.theme
+package com.narcis.tddCocktailGame.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.narcis.tdd_cocktail_game"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.narcis.tdd_cocktail_game"

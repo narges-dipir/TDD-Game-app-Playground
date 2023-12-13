@@ -1,4 +1,4 @@
-package com.narcis.tdd_cocktail_game.model
+package com.narcis.tddCocktailGame.model
 
 class Game {
     var currentScore = 0
@@ -8,6 +8,6 @@ class Game {
         private set
 
     fun incrementScore() {
-        // TODO
+        currentScore++
     }
 }
