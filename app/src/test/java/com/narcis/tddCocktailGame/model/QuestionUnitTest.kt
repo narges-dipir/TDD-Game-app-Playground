@@ -5,10 +5,13 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.lang.IllegalArgumentException
 
 private const val INCORRECT = "INCORRECT"
 
 private const val CORRECT = "CORRECT"
+
+private const val INVALID = "INVALID"
 
 class QuestionUnitTest {
 
@@ -37,5 +40,12 @@ class QuestionUnitTest {
         val question = Question(CORRECT, INCORRECT)
         val result = question.answer(INCORRECT)
         assertFalse(result)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `when answering with invalid option should throw exception`() {
+        val question = Question(CORRECT, INCORRECT)
+
+        question.answer(INVALID)
     }
 }
