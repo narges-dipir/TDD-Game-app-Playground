@@ -20,10 +20,9 @@ class GameUnitTests {
     }
 
     @Test
-    fun `when incrementing score below highScore should not increment high score`(){
+    fun `when incrementing score below highScore should not increment high score`() {
         val game = Game(10)
         game.incrementScore()
         assertEquals(10, game.highScore)
     }
-
 }
