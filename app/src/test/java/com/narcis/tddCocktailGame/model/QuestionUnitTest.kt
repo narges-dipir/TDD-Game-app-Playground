@@ -1,6 +1,7 @@
 package com.narcis.tddCocktailGame.model
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -29,5 +30,12 @@ class QuestionUnitTest {
         val question = Question(CORRECT, INCORRECT)
         val result = question.answer(CORRECT)
         assertTrue(result)
+    }
+
+    @Test
+    fun `when answering with incorrect option should Return false`() {
+        val question = Question(CORRECT, INCORRECT)
+        val result = question.answer(INCORRECT)
+        assertFalse(result)
     }
 }
