@@ -1,6 +1,7 @@
 package com.narcis.tddCocktailGame.model
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 
 class GameUnitTests {
@@ -24,5 +25,12 @@ class GameUnitTests {
         val game = Game(10)
         game.incrementScore()
         assertEquals(10, game.highScore)
+    }
+
+    @Test
+    fun `when ask next question return not null question`() {
+        val game = Game(10, 5)
+        val question: Question = game.nextQuestion()
+        assertNotNull(question)
     }
 }
