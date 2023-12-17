@@ -8,14 +8,15 @@ import org.junit.Before
 import org.junit.Test
 import java.lang.IllegalArgumentException
 
-private const val INCORRECT = "INCORRECT"
+const val INCORRECT = "INCORRECT"
 
-private const val CORRECT = "CORRECT"
+const val CORRECT = "CORRECT"
 
-private const val INVALID = "INVALID"
+const val INVALID = "INVALID"
 
 class QuestionUnitTest {
     private lateinit var question: Question
+
     @Before
     fun setUp() {
         question = Question(CORRECT, INCORRECT)
