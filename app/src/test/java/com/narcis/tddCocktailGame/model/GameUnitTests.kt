@@ -1,6 +1,7 @@
 package com.narcis.tddCocktailGame.model
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Test
 
@@ -34,5 +35,17 @@ class GameUnitTests {
         val game = Game(questions = questions)
         val nextQuestion = game.nextQuestion()
         assertSame(question_one, nextQuestion)
+    }
+
+    @Test
+    fun `when getting next question without more questions should return null`() {
+        val question_one = Question(CORRECT, INCORRECT)
+        val questions = listOf(question_one)
+        val game = Game(questions = questions)
+
+        game.nextQuestion()
+        val nextQuestion = game.nextQuestion()
+
+        assertNull(nextQuestion)
     }
 }
