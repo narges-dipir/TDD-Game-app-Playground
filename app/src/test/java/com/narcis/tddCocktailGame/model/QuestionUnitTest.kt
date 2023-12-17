@@ -1,5 +1,6 @@
 package com.narcis.tddCocktailGame.model
 
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -48,5 +49,12 @@ class QuestionUnitTest {
     @Test(expected = IllegalArgumentException::class)
     fun `when answering with invalid option should throw exception`() {
         question.answer(INVALID)
+    }
+
+    @Test
+    fun `when creating question should return option with custom sort`(){
+        val options = question.getOptions{it.reversed()}
+
+        Assert.assertEquals(listOf(INCORRECT, CORRECT), options)
     }
 }
