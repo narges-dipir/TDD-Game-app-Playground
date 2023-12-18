@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "tdd_cocktail_game"
 include(":app")
- 
+include(":mockito")
