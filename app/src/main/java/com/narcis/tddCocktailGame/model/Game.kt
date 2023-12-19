@@ -26,4 +26,8 @@ class Game(
         }
         return null
     }
+
+    fun answer(question: Question, option: String) {
+        question.answer(option)
+    }
 }

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.narcis.mockito"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.narcis.mockito"
@@ -30,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = "11"
