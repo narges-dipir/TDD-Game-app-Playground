@@ -4,9 +4,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Test
+import org.mockito.kotlin.*
+
+const val OPTION = "OPTION"
 
 class GameUnitTests {
-
     @Test
     fun `when incrementing score should increment current score`() {
         val game = Game(0, emptyList())
@@ -47,5 +49,13 @@ class GameUnitTests {
         val nextQuestion = game.nextQuestion()
 
         assertNull(nextQuestion)
+    }
+
+    @Test
+    fun `when answering should delegate to question`() {
+        val question = mock<Question>()
+        val game = Game(questions = listOf(question))
+        game.answer(question, OPTION)
+        verify(question, times(1)).answer(eq(OPTION))
     }
 }
