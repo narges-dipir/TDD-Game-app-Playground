@@ -29,5 +29,6 @@ class Game(
 
     fun answer(question: Question, option: String) {
         question.answer(option)
+        incrementScore()
     }
 }

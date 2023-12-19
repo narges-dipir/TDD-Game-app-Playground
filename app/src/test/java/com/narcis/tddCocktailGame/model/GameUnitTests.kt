@@ -65,7 +65,7 @@ class GameUnitTests {
     fun `when answering correctly should increment current score`() {
         val question = mock<Question>()
         whenever(question.answer(anyString())).thenReturn(true)
-        val game = Game(listOf(question))
+        val game = Game(questions = listOf(question))
         game.answer(question, OPTION)
         assertEquals(1, game.currentScore)
     }
