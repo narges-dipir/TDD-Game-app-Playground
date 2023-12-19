@@ -1,9 +1,11 @@
 package com.narcis.tddCocktailGame.model
 
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.*
 
 const val OPTION = "OPTION"
@@ -59,5 +61,12 @@ class GameUnitTests {
         verify(question, times(1)).answer(eq(OPTION))
     }
 
-
+    @Test
+    fun `when answering correctly should increment current score`() {
+        val question = mock<Question>()
+        whenever(question.answer(anyString())).thenReturn(true)
+        val game = Game(listOf(question))
+        game.answer(question, OPTION)
+        assertEquals(1, game.currentScore)
+    }
 }
