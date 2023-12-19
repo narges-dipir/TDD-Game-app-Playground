@@ -1,6 +1,5 @@
 package com.narcis.tddCocktailGame.model
 
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
@@ -71,7 +70,7 @@ class GameUnitTests {
     }
 
     @Test
-    fun `when answering incorrectly should not increment current score`(){
+    fun `when answering incorrectly should not increment current score`() {
         val question = mock<Question>()
         whenever(question.answer(anyString())).thenReturn(false)
         val game = Game(questions = listOf(question))

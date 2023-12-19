@@ -4,18 +4,16 @@ class Game(
     highest: Int = 0,
     private val questions: List<Question>,
 ) {
-    var currentScore = 0
-        private set
+    private val score = Score(highest)
+    val currentScore
+        get() = score.current
 
-    var highScore = highest
-        private set
+    val highScore
+        get() = score.highest
 
     private var questionIndex = -1
     fun incrementScore() {
-        currentScore++
-        if (currentScore > highScore) {
-            highScore++
-        }
+        score.increment()
     }
 
     fun nextQuestion(): Question? {
