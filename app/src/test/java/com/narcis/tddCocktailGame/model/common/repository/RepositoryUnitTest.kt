@@ -8,9 +8,12 @@ import com.narcis.tddCocktailGame.common.repository.CocktailsRepositoryImpl
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -43,5 +46,19 @@ class RepositoryUnitTest {
     fun `get score should get from shared preferences`() {
         repository.getHighScore()
         verify(sharedPreferences).getInt(any(), any())
+    }
+
+    @Test
+    fun `save score should not save to sharedPreferences if lower`(){
+        val previouslySavedHighScore = 100
+        val newHighScore = 10
+        val spyRepository = spy(repository)
+        doReturn(previouslySavedHighScore)
+            .whenever(spyRepository)
+            .getHighScore()
+
+        spyRepository.saveHighScore(newHighScore)
+        verify(sharedPreferencesEditor, never())
+            .putInt(any(), eq(newHighScore))
     }
 }
