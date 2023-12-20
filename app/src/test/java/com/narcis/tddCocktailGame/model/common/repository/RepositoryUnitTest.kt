@@ -1,8 +1,11 @@
 package com.narcis.tddCocktailGame.model.common.repository
 
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import com.narcis.tddCocktailGame.common.network.CocktailsApi
+import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.CocktailsRepositoryImpl
+import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
@@ -12,14 +15,21 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 class RepositoryUnitTest {
+    private lateinit var repository: CocktailsRepository
+    private lateinit var api: CocktailsApi
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPreferencesEditor: SharedPreferences.Editor
+
+    @Before
+    fun setUp() {
+        api = mock()
+        sharedPreferences = mock()
+        whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
+        repository = CocktailsRepositoryImpl(api, sharedPreferences)
+    }
+
     @Test
     fun `save score should save to sharedPreferences`() {
-        val api: CocktailsApi = mock()
-        val sharedPreferencesEditor: SharedPreferences.Editor = mock()
-        val sharedPreferences: SharedPreferences = mock()
-        whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
-
-        val repository = CocktailsRepositoryImpl(api, sharedPreferences)
         val score = 100
         repository.saveHighScore(score)
 
@@ -31,10 +41,6 @@ class RepositoryUnitTest {
 
     @Test
     fun `get score should get from shared preferences`() {
-        val api: CocktailsApi = mock()
-        val sharedPreferences: SharedPreferences = mock()
-
-        val repository = CocktailsRepositoryImpl(api, sharedPreferences)
         repository.getHighScore()
         verify(sharedPreferences).getInt(any(), any())
     }
