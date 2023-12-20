@@ -13,4 +13,8 @@ class CocktailsRepositoryImpl(
         editor.putInt(HIGH_SCORE_KEY, score)
         editor.apply()
     }
+
+    override fun getHighScore(): Int {
+        return sharedPreferences.getInt(HIGH_SCORE_KEY, 0)
+    }
 }
