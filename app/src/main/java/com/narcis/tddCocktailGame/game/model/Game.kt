@@ -1,4 +1,4 @@
-package com.narcis.tddCocktailGame.model
+package com.narcis.tddCocktailGame.game.model
 
 class Game(
     val score: Score = Score(0),

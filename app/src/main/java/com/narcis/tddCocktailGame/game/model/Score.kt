@@ -1,4 +1,4 @@
-package com.narcis.tddCocktailGame.model
+package com.narcis.tddCocktailGame.game.model
 
 class Score(highestScore: Int = 0) {
     var current = 0

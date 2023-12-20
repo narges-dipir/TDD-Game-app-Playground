@@ -1,4 +1,4 @@
-package com.narcis.tddCocktailGame.model.common.repository
+package com.narcis.tddCocktailGame.common.repository
 
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor

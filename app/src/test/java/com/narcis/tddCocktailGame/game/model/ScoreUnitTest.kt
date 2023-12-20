@@ -1,5 +1,6 @@
-package com.narcis.tddCocktailGame.model
+package com.narcis.tddCocktailGame.game.model
 
+import com.narcis.tddCocktailGame.game.model.Score
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
