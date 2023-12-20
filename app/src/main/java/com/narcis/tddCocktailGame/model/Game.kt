@@ -1,16 +1,9 @@
 package com.narcis.tddCocktailGame.model
 
 class Game(
-    highest: Int = 0,
+    val score: Score = Score(0),
     private val questions: List<Question>,
 ) {
-    private val score = Score(highest)
-    val currentScore
-        get() = score.current
-
-    val highScore
-        get() = score.highest
-
     private var questionIndex = -1
     fun incrementScore() {
         score.increment()
@@ -28,7 +21,7 @@ class Game(
     fun answer(question: Question, option: String) {
         val result = question.answer(option)
         if (result) {
-            incrementScore()
+            score.increment()
         }
     }
 }

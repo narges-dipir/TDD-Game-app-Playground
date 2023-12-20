@@ -26,7 +26,7 @@ class ScoreUnitTest {
     }
 
     @Test
-    fun `when increment score below highScore should not increment highScore`(){
+    fun `when increment score below highScore should not increment highScore`() {
         val score = Score(10)
         score.increment()
         assertEquals(10, score.highest)

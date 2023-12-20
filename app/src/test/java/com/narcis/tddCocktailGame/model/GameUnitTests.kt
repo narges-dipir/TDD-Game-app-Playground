@@ -1,6 +1,5 @@
 package com.narcis.tddCocktailGame.model
 
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Test
@@ -10,27 +9,6 @@ import org.mockito.kotlin.*
 const val OPTION = "OPTION"
 
 class GameUnitTests {
-    @Test
-    fun `when incrementing score should increment current score`() {
-        val game = Game(0, emptyList())
-        game.incrementScore()
-        assertEquals(1, game.currentScore)
-    }
-
-    @Test
-    fun `when incrementing score above highScore should also increment highScore`() {
-        val game = Game(0, emptyList())
-        game.incrementScore()
-        assertEquals(1, game.highScore)
-    }
-
-    @Test
-    fun `when incrementing score below highScore should not increment high score`() {
-        val game = Game(10, emptyList())
-        game.incrementScore()
-        assertEquals(10, game.highScore)
-    }
-
     @Test
     fun `when getting next question should return question`() {
         val question_one = Question(CORRECT, INCORRECT)
@@ -64,16 +42,18 @@ class GameUnitTests {
     fun `when answering correctly should increment current score`() {
         val question = mock<Question>()
         whenever(question.answer(anyString())).thenReturn(true)
-        val game = Game(questions = listOf(question))
+        val score = mock<Score>()
+        val game = Game(score, questions = listOf(question))
         game.answer(question, OPTION)
-        assertEquals(1, game.currentScore)
+        verify(score).increment()
     }
 
     @Test
     fun `when answering incorrectly should not increment current score`() {
         val question = mock<Question>()
         whenever(question.answer(anyString())).thenReturn(false)
-        val game = Game(questions = listOf(question))
-        assertEquals(0, game.currentScore)
+        val score = mock<Score>()
+        val game = Game(score, questions = listOf(question))
+        verify(score, never()).increment()
     }
 }
