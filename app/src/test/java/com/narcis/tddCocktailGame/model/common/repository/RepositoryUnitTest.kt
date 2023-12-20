@@ -1,6 +1,8 @@
 package com.narcis.tddCocktailGame.model.common.repository
 
 import android.content.SharedPreferences
+import com.narcis.tddCocktailGame.common.network.CocktailsApi
+import com.narcis.tddCocktailGame.common.repository.CocktailsRepositoryImpl
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
@@ -16,7 +18,7 @@ class RepositoryUnitTest {
         val sharedPreferences: SharedPreferences = mock()
         whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
 
-        val repository = CocktailRepositoryImpl(api, sharedPreferences)
+        val repository = CocktailsRepositoryImpl(api, sharedPreferences)
         val score = 100
         repository.saveHighScore(score)
 
