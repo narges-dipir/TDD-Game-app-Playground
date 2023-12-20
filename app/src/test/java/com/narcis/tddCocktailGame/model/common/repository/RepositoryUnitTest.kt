@@ -27,6 +27,7 @@ class RepositoryUnitTest {
     fun setUp() {
         api = mock()
         sharedPreferences = mock()
+        sharedPreferencesEditor = mock()
         whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
         repository = CocktailsRepositoryImpl(api, sharedPreferences)
     }
