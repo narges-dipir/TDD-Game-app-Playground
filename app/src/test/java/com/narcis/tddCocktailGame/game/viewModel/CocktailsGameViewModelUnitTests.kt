@@ -28,7 +28,7 @@ class CocktailsGameViewModelUnitTests {
     fun setUp(){
         repository = mock()
         factory = mock()
-        viewModel = CocktailViewModel(repository, factory)
+        viewModel = CocktailsGameViewModel(repository, factory)
 
         game = mock()
 
