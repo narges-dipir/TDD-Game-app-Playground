@@ -67,6 +67,20 @@ class CocktailsGameViewModelUnitTests {
 
         verify(errorObserver).onChanged(eq(false))
     }
+
+    @Test
+    fun `init should show error when factory returns error`() {
+        setUpFactoryWithError()
+        viewModel.initGame()
+        verify(errorObserver).onChanged(eq(true))
+    }
+
+    @Test
+    fun `init should hide loading when factory returns error`() {
+        setUpFactoryWithError()
+        viewModel.initGame()
+        verify(loadingObserver).onChanged(eq(false))
+    }
     private fun setUpFactoryWithError() {
         doAnswer {
             val callback: CocktailsGameFactory.Callback =

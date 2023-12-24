@@ -18,15 +18,18 @@ class CocktailsGameViewModel(
     private val questionLiveData = MutableLiveData<Question>()
     private val scoreLiveData = MutableLiveData<Score>()
     fun initGame() {
-        factory.buildGame(object : CocktailsGameFactory.Callback{
+        loadingLiveData.value = true
+        errorLiveData.value = false
+        factory.buildGame(object : CocktailsGameFactory.Callback {
             override fun onSuccess(game: Game) {
-                TODO("Not yet implemented")
+                loadingLiveData.value = false
+                errorLiveData.value = false
             }
 
             override fun onError() {
-                TODO("Not yet implemented")
+                loadingLiveData.value = false
+                errorLiveData.value = true
             }
-
         })
     }
     fun getLoading(): LiveData<Boolean> = loadingLiveData
