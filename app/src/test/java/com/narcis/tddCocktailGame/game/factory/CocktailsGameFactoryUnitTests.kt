@@ -5,7 +5,6 @@ import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.RepositoryCallback
 import com.narcis.tddCocktailGame.game.model.Game
 import com.narcis.tddCocktailGame.game.model.Question
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -78,23 +77,23 @@ class CocktailsGameFactoryUnitTests {
     }
 
     @Test
-    fun `buildGame should build game with questions`(){
+    fun `buildGame should build game with questions`() {
         setUpRepositoryWithCocktails(repository)
 
-        factory.buildGame(object : CocktailsGameFactory.Callback{
+        factory.buildGame(object : CocktailsGameFactory.Callback {
             override fun onSuccess(game: Game) {
                 cocktails.forEach {
-                    assertQuestion(game.nextQuestion(),
-                        it.idDrink,
-                        it.strDrinkThumb
-                        )
+                    assertQuestion(
+                        game.nextQuestion(),
+                        it.strDrink,
+                        it.strDrinkThumb,
+                    )
                 }
             }
 
             override fun onError() {
                 return fail()
             }
-
         })
     }
     private fun setUpRepositoryWithCocktails(
