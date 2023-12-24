@@ -15,10 +15,9 @@ class CocktailsGameFactoryImpl(private val repository: CocktailsRepository) :
                 }
 
                 override fun onError(e: String) {
-                    TODO("Not yet implemented")
+                    callback.onError()
                 }
-
-            }
+            },
         )
     }
 }

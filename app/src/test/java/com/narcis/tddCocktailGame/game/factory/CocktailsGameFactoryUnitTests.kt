@@ -43,7 +43,7 @@ class CocktailsGameFactoryUnitTests {
     }
 
     @Test
-    fun `buildGame should call onError`(){
+    fun `buildGame should call onError`() {
         val callback = mock<CocktailsGameFactory.Callback>()
         setUpRepositoryWithError(repository)
         factory.buildGame(callback)
@@ -58,11 +58,11 @@ class CocktailsGameFactoryUnitTests {
         }.whenever(repository).getAlcoholic(any())
     }
     private fun setUpRepositoryWithError(
-        repository: CocktailsRepository
+        repository: CocktailsRepository,
     ) {
         doAnswer {
             val callback: RepositoryCallback<List<Cocktail>, String> = it.getArgument(0)
             callback.onError("Error")
-        }.whenever(repository)
+        }.whenever(repository).getAlcoholic(any())
     }
 }
