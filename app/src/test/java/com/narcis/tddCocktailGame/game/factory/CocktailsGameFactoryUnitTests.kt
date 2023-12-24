@@ -12,13 +12,13 @@ class CocktailsGameFactoryUnitTests {
     private lateinit var factory: CocktailsGameFactory
 
     @Before
-    fun setUp(){
+    fun setUp() {
         repository = mock()
         factory = CocktailsGameFactoryImpl(repository)
     }
 
     @Test
-    fun `build game should get cocktails from repo`(){
+    fun `build game should get cocktails from repo`() {
         factory.buildGame(mock())
         verify(repository).getAlcoholic(any())
     }
