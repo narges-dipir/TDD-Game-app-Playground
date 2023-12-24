@@ -3,10 +3,11 @@ package com.narcis.tddCocktailGame.common.repository
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import com.narcis.tddCocktailGame.common.network.CocktailsApi
-import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
-import com.narcis.tddCocktailGame.common.repository.CocktailsRepositoryImpl
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
@@ -17,17 +18,21 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
+@RunWith(MockitoJUnitRunner::class)
 class RepositoryUnitTest {
     private lateinit var repository: CocktailsRepository
+
+    @Mock
     private lateinit var api: CocktailsApi
+
+    @Mock
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var sharedPreferencesEditor: SharedPreferences.Editor
+
+    @Mock
+    private lateinit var sharedPreferencesEditor: Editor
 
     @Before
     fun setUp() {
-        api = mock()
-        sharedPreferences = mock()
-        sharedPreferencesEditor = mock()
         whenever(sharedPreferences.edit()).thenReturn(sharedPreferencesEditor)
         repository = CocktailsRepositoryImpl(api, sharedPreferences)
     }
@@ -50,7 +55,7 @@ class RepositoryUnitTest {
     }
 
     @Test
-    fun `save score should not save to sharedPreferences if lower`(){
+    fun `save score should not save to sharedPreferences if lower`() {
         val previouslySavedHighScore = 100
         val newHighScore = 10
         val spyRepository = spy(repository)
