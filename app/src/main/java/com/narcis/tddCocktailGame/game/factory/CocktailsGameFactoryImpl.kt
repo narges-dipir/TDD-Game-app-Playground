@@ -4,6 +4,7 @@ import com.narcis.tddCocktailGame.common.network.Cocktail
 import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.RepositoryCallback
 import com.narcis.tddCocktailGame.game.model.Game
+import com.narcis.tddCocktailGame.game.model.Score
 
 class CocktailsGameFactoryImpl(private val repository: CocktailsRepository) :
     CocktailsGameFactory {
@@ -11,7 +12,9 @@ class CocktailsGameFactoryImpl(private val repository: CocktailsRepository) :
         repository.getAlcoholic(
             object : RepositoryCallback<List<Cocktail>, String> {
                 override fun onSuccess(t: List<Cocktail>) {
-                    callback.onSuccess(Game(questions = emptyList()))
+                    val score = Score(repository.getHighScore())
+                    val game = Game(score, emptyList())
+                    callback.onSuccess(game)
                 }
 
                 override fun onError(e: String) {
