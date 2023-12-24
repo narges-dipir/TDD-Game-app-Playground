@@ -3,6 +3,8 @@ package com.narcis.tddCocktailGame.game.factory
 import com.narcis.tddCocktailGame.common.network.Cocktail
 import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.RepositoryCallback
+import com.narcis.tddCocktailGame.game.model.Game
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -48,6 +50,29 @@ class CocktailsGameFactoryUnitTests {
         setUpRepositoryWithError(repository)
         factory.buildGame(callback)
         verify(callback).onError()
+    }
+
+    @Test
+    fun `buildGame should get highScore from repo`() {
+        setUpRepositoryWithCocktails(repository)
+        factory.buildGame(mock())
+        verify(repository).getHighScore()
+    }
+
+    @Test
+    fun `buildGame should build game with highScore`() {
+        setUpRepositoryWithCocktails(repository)
+        val highScore = 100
+        whenever(repository.getHighScore()).thenReturn(highScore)
+        factory.buildGame(object : CocktailsGameFactory.Callback {
+            override fun onSuccess(game: Game) {
+                return assertEquals(highScore, game.score.highest)
+            }
+
+            override fun onError() {
+                return fail()
+            }
+        })
     }
     private fun setUpRepositoryWithCocktails(
         repository: CocktailsRepository,
