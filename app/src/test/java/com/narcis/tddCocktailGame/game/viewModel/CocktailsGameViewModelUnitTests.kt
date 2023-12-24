@@ -91,6 +91,15 @@ class CocktailsGameViewModelUnitTests {
         viewModel.initGame()
         verify(scoreObserver).onChanged(eq(score))
     }
+
+    @Test
+    fun `init should show first question when factory returns success`() {
+        val question = mock<Question>()
+        whenever(game.nextQuestion()).thenReturn(question)
+        setUpFactoryWithSuccessGame(game)
+        viewModel.initGame()
+        verify(questionObserver).onChanged(eq(question))
+    }
     private fun setUpFactoryWithError() {
         doAnswer {
             val callback: CocktailsGameFactory.Callback =
