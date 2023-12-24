@@ -86,7 +86,7 @@ class CocktailsGameViewModelUnitTests {
     }
 
     @Test
-    fun `init should show score when factory returns success`(){
+    fun `init should show score when factory returns success`() {
         val score = mock<Score>()
         whenever(game.score).thenReturn(score)
         setUpFactoryWithSuccessGame(game)
@@ -103,6 +103,7 @@ class CocktailsGameViewModelUnitTests {
         viewModel.initGame()
         verify(questionObserver).onChanged(eq(question))
     }
+
     @Test
     fun `next question should show question`() {
         val question1 = mock<Question>()
@@ -114,6 +115,7 @@ class CocktailsGameViewModelUnitTests {
         viewModel.nextQuestion()
         verify(questionObserver).onChanged(eq(question2))
     }
+
     @Test
     fun `answer question should delegate to game save highScore show question and score`() {
         val score = mock<Score>()
