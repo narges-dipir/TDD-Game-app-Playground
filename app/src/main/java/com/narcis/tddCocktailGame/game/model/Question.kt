@@ -3,6 +3,7 @@ package com.narcis.tddCocktailGame.game.model
 class Question(
     val correctOption: String,
     val incorrectOption: String,
+    val imageUrl: String? = null,
 ) {
     var answeredOption: String? = null
         private set
@@ -14,6 +15,7 @@ class Question(
         if (option != correctOption && option != incorrectOption) {
             throw IllegalArgumentException("Not a valid option")
         }
+
         answeredOption = option
 
         return isAnsweredCorrectly
