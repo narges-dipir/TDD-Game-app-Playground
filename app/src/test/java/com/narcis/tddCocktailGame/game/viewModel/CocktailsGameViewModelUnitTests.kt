@@ -9,7 +9,12 @@ import com.narcis.tddCocktailGame.game.model.Question
 import com.narcis.tddCocktailGame.game.model.Score
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class CocktailsGameViewModelUnitTests {
     @get:Rule
@@ -25,7 +30,7 @@ class CocktailsGameViewModelUnitTests {
     private lateinit var questionObserver: Observer<Question>
 
     @Before
-    fun setUp(){
+    fun setUp() {
         repository = mock()
         factory = mock()
         viewModel = CocktailsGameViewModel(repository, factory)
@@ -39,5 +44,25 @@ class CocktailsGameViewModelUnitTests {
         viewModel.getScore().observeForever(scoreObserver)
         viewModel.getQuestion().observeForever(questionObserver)
         viewModel.getError().observeForever(errorObserver)
+    }
+
+    private fun setUpFactoryWithSuccessGame(game: Game) {
+        doAnswer {
+            val callback: CocktailsGameFactory.Callback = it.getArgument(0)
+            callback.onSuccess(game)
+        }.whenever(factory).buildGame(any())
+    }
+
+    @Test
+    fun `init should buildGame`(){
+        viewModel.initGame()
+        verify(factory).buildGame(any())
+    }
+    private fun setUpFactoryWithError() {
+        doAnswer {
+            val callback: CocktailsGameFactory.Callback =
+                it.getArgument(0)
+            callback.onError()
+        }.whenever(factory).buildGame(any())
     }
 }
