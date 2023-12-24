@@ -4,6 +4,8 @@ import com.narcis.tddCocktailGame.common.network.Cocktail
 import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.RepositoryCallback
 import com.narcis.tddCocktailGame.game.model.Game
+import com.narcis.tddCocktailGame.game.model.Question
+import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -74,6 +76,27 @@ class CocktailsGameFactoryUnitTests {
             }
         })
     }
+
+    @Test
+    fun `buildGame should build game with questions`(){
+        setUpRepositoryWithCocktails(repository)
+
+        factory.buildGame(object : CocktailsGameFactory.Callback{
+            override fun onSuccess(game: Game) {
+                cocktails.forEach {
+                    assertQuestion(game.nextQuestion(),
+                        it.idDrink,
+                        it.strDrinkThumb
+                        )
+                }
+            }
+
+            override fun onError() {
+                return fail()
+            }
+
+        })
+    }
     private fun setUpRepositoryWithCocktails(
         repository: CocktailsRepository,
     ) {
@@ -89,5 +112,11 @@ class CocktailsGameFactoryUnitTests {
             val callback: RepositoryCallback<List<Cocktail>, String> = it.getArgument(0)
             callback.onError("Error")
         }.whenever(repository).getAlcoholic(any())
+    }
+    private fun assertQuestion(question: Question?, correctOption: String, imageUrl: String?) {
+        assertNotNull(question)
+        assertEquals(imageUrl, question?.imageUrl)
+        assertEquals(correctOption, question?.correctOption)
+        assertNotEquals(correctOption, question?.incorrectOption)
     }
 }
