@@ -40,6 +40,7 @@ class CocktailsGameViewModelUnitTests {
         loadingObserver = mock()
         errorObserver = mock()
         questionObserver = mock()
+        scoreObserver = mock()
         viewModel.getLoading().observeForever(loadingObserver)
         viewModel.getScore().observeForever(scoreObserver)
         viewModel.getQuestion().observeForever(questionObserver)
@@ -54,7 +55,7 @@ class CocktailsGameViewModelUnitTests {
     }
 
     @Test
-    fun `init should buildGame`(){
+    fun `init should buildGame`() {
         viewModel.initGame()
         verify(factory).buildGame(any())
     }
