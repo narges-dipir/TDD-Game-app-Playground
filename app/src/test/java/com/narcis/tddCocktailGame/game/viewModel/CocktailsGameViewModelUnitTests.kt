@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -58,6 +59,13 @@ class CocktailsGameViewModelUnitTests {
     fun `init should buildGame`() {
         viewModel.initGame()
         verify(factory).buildGame(any())
+    }
+
+    @Test
+    fun `init should hide error`() {
+        viewModel.initGame()
+
+        verify(errorObserver).onChanged(eq(false))
     }
     private fun setUpFactoryWithError() {
         doAnswer {
