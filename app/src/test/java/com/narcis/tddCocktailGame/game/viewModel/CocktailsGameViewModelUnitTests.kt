@@ -13,9 +13,12 @@ import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+
+private const val VALUE = "VALUE"
 
 class CocktailsGameViewModelUnitTests {
     @get:Rule
@@ -110,6 +113,21 @@ class CocktailsGameViewModelUnitTests {
 
         viewModel.nextQuestion()
         verify(questionObserver).onChanged(eq(question2))
+    }
+    @Test
+    fun `answer question should delegate to game save highScore show question and score`() {
+        val score = mock<Score>()
+        val question = mock<Question>()
+        whenever(game.score).thenReturn(score)
+        setUpFactoryWithSuccessGame(game)
+        viewModel.initGame()
+        viewModel.answerQuestion(question, VALUE)
+        inOrder(game, repository, questionObserver, scoreObserver) {
+            verify(game).answer(eq(question), eq(VALUE))
+            verify(repository).saveHighScore(any())
+            verify(scoreObserver).onChanged(eq(score))
+            verify(questionObserver).onChanged(eq(question))
+        }
     }
     private fun setUpFactoryWithError() {
         doAnswer {
