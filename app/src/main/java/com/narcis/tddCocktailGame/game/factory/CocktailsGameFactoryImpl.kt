@@ -3,6 +3,7 @@ package com.narcis.tddCocktailGame.game.factory
 import com.narcis.tddCocktailGame.common.network.Cocktail
 import com.narcis.tddCocktailGame.common.repository.CocktailsRepository
 import com.narcis.tddCocktailGame.common.repository.RepositoryCallback
+import com.narcis.tddCocktailGame.game.model.Game
 
 class CocktailsGameFactoryImpl(private val repository: CocktailsRepository) :
     CocktailsGameFactory {
@@ -10,7 +11,7 @@ class CocktailsGameFactoryImpl(private val repository: CocktailsRepository) :
         repository.getAlcoholic(
             object : RepositoryCallback<List<Cocktail>, String> {
                 override fun onSuccess(t: List<Cocktail>) {
-                    TODO("Not yet implemented")
+                    callback.onSuccess(Game(questions = emptyList()))
                 }
 
                 override fun onError(e: String) {
