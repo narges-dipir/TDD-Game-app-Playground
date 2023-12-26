@@ -2,24 +2,27 @@ package com.example.wishlist.viewModel
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.wishlist.dataPersistance.RepositoryImpl
 import com.example.wishlist.dataPersistance.WishlistDao
 import com.example.wishlist.dataPersistance.WishlistDaoImpl
 import com.example.wishlist.model.Wishlist
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.component.getScopeId
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class DetailViewModelTest {
     @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    val taskExecutorRule = InstantTaskExecutorRule()
 
     private val wishlistDao: WishlistDao = Mockito.spy(WishlistDaoImpl())
     private val viewModel = DetailViewModel(RepositoryImpl(wishlistDao))
@@ -31,14 +34,18 @@ class DetailViewModelTest {
         verify(wishlistDao).save(any())
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @Test
     fun saveNewItemSavesData() {
         val wishItem = Wishlist("Victoria", listOf("RW Android Apprentice book", "AndroidPhone"), 1)
         val name = "smart watch"
         viewModel.saveNewItem(wishItem, name)
         val mockObserver = mock<Observer<Wishlist>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            wishlistDao.findById(wishItem.id)
+                .observeForever(mockObserver)
 
-        wishlistDao.findById(wishItem.id).observeForever(mockObserver)
-        verify(mockObserver).onChanged(wishItem.copy(wishes = wishItem.wishes + name))
+            verify(mockObserver).onChanged(wishItem.copy(wishes = wishItem.wishes + name))
+        }
     }
 }
