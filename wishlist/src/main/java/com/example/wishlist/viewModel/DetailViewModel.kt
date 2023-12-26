@@ -13,6 +13,6 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getWishlist(id: Int): LiveData<Wishlist> {
-        return repository.getWishlist(0)
+        return repository.getWishlist(id)
     }
 }
