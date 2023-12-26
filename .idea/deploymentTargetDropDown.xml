@@ -5,6 +5,9 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="getWishListCallsDatabase()">
+        <State />
+      </entry>
       <entry key="mockito">
         <State />
       </entry>
