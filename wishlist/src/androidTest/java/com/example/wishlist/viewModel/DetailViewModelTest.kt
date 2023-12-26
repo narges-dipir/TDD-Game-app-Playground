@@ -34,7 +34,6 @@ class DetailViewModelTest {
         verify(wishlistDao).save(any())
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     @Test
     fun saveNewItemSavesData() = runTest {
         val wishItem = Wishlist("Victoria", listOf("RW Android Apprentice book", "AndroidPhone"), 1)
@@ -46,5 +45,11 @@ class DetailViewModelTest {
                 .observeForever(mockObserver)
             verify(mockObserver).onChanged(wishItem.copy(wishes = wishItem.wishes + name))
         }
+    }
+
+    @Test
+    fun getWishListCallsDatabase() {
+        viewModel.getWishlist(1)
+        verify(wishlistDao).findById(any())
     }
 }
