@@ -8,6 +8,12 @@
       <entry key="mockito">
         <State />
       </entry>
+      <entry key="saveNewItemCallsDatabase()">
+        <State />
+      </entry>
+      <entry key="saveNewItemSavesCorrectItem()">
+        <State />
+      </entry>
       <entry key="wishlist">
         <State />
       </entry>
