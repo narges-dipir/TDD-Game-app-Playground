@@ -17,7 +17,9 @@ class RepositoryImpl(private val wishlistDao: WishlistDao) : Repository {
         return wishlistDao.findById(id)
     }
 
-    override fun saveWishlistItem(wishlist: Wishlist) {
-        wishlistDao.save(wishlist)
+    override fun saveWishlistItem(wishlist: Wishlist, name: String) {
+        wishlistDao.save(
+            wishlist.copy(wishes = wishlist.wishes + name),
+        )
     }
 }
