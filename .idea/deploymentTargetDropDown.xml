@@ -14,6 +14,9 @@
       <entry key="saveNewItemSavesCorrectItem()">
         <State />
       </entry>
+      <entry key="saveNewItemSavesData()">
+        <State />
+      </entry>
       <entry key="wishlist">
         <State />
       </entry>

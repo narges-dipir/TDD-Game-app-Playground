@@ -8,8 +8,8 @@ import com.example.wishlist.dataPersistance.WishlistDaoImpl
 import com.example.wishlist.model.Wishlist
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,15 +36,14 @@ class DetailViewModelTest {
 
     @OptIn(DelicateCoroutinesApi::class)
     @Test
-    fun saveNewItemSavesData() {
+    fun saveNewItemSavesData() = runTest {
         val wishItem = Wishlist("Victoria", listOf("RW Android Apprentice book", "AndroidPhone"), 1)
         val name = "smart watch"
         viewModel.saveNewItem(wishItem, name)
         val mockObserver = mock<Observer<Wishlist>>()
-        GlobalScope.launch(Dispatchers.Main) {
+        runBlocking(Dispatchers.Main) {
             wishlistDao.findById(wishItem.id)
                 .observeForever(mockObserver)
-
             verify(mockObserver).onChanged(wishItem.copy(wishes = wishItem.wishes + name))
         }
     }
