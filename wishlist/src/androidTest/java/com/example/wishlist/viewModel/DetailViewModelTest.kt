@@ -6,7 +6,6 @@ import com.example.wishlist.dataPersistance.RepositoryImpl
 import com.example.wishlist.dataPersistance.WishlistDao
 import com.example.wishlist.dataPersistance.WishlistDaoImpl
 import com.example.wishlist.model.Wishlist
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
@@ -51,5 +50,18 @@ class DetailViewModelTest {
     fun getWishListCallsDatabase() {
         viewModel.getWishlist(1)
         verify(wishlistDao).findById(any())
+    }
+
+    @Test
+    fun getWishListReturnsCorrectData() = runTest {
+        val wishItem = Wishlist("Victoria", listOf("RW Android Apprentice book", "AndroidPhone"), 1)
+        val name = "smart watch"
+        wishlistDao.save(wishItem)
+        runBlocking(Dispatchers.Main) {
+            val mockObserver = mock<Observer<Wishlist>>()
+            viewModel.getWishlist(1).observeForever(mockObserver)
+
+            verify(mockObserver).onChanged(wishItem)
+        }
     }
 }
