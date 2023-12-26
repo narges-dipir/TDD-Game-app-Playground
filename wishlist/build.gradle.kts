@@ -43,6 +43,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.2"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -100,6 +101,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("android.arch.core:core-testing:1.1.1")
+    testImplementation("org.robolectric:robolectric:4.11.1")
 
     // Test rules and transitive dependencies:
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
