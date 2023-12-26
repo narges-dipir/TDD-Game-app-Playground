@@ -9,6 +9,7 @@ import com.example.wishlist.model.Wishlist
 class DetailViewModel(private val repository: Repository) : ViewModel() {
 
     fun saveNewItem(wishlist: Wishlist, name: String) {
+        repository.saveWishlistItem(Wishlist("", listOf()))
     }
 
     fun getWishlist(id: Int): LiveData<Wishlist> {
