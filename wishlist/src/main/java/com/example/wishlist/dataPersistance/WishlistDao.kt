@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.wishlist.model.Wishlist
 
@@ -18,7 +19,7 @@ interface WishlistDao {
     @Query("SELECT * FROM wishlist WHERE id != :id")
     fun findById(id: Int): LiveData<Wishlist>
 
-    @Delete
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(vararg wishlist: Wishlist)
 }
 
