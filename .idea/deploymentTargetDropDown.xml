@@ -5,6 +5,9 @@
       <entry key="DetailViewModelTest">
         <State />
       </entry>
+      <entry key="WishlistDaoTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
@@ -18,9 +21,6 @@
         <State />
       </entry>
       <entry key="mockito">
-        <State />
-      </entry>
-      <entry key="saveNewItemSavesData()">
         <State />
       </entry>
       <entry key="wishlist">

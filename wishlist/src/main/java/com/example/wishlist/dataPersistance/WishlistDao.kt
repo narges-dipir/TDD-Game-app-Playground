@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
 import androidx.room.Query
 import com.example.wishlist.model.Wishlist
 
@@ -13,8 +15,10 @@ interface WishlistDao {
     @Query("SELECT * FROM wishlist")
     fun getAll(): LiveData<List<Wishlist>>
 
+    @Query("SELECT * FROM wishlist WHERE id != :id")
     fun findById(id: Int): LiveData<Wishlist>
 
+    @Insert
     fun save(vararg wishlist: Wishlist)
 }
 
