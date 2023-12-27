@@ -2,16 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="DetailViewModelTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
       <entry key="getWishListCallsDatabase()">
         <State />
       </entry>
-      <entry key="mockito">
+      <entry key="getWishListReturnsCorrectData()">
         <State />
       </entry>
-      <entry key="saveNewItemCallsDatabase()">
+      <entry key="mockito">
         <State />
       </entry>
       <entry key="saveNewItemSavesCorrectItem()">

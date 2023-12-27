@@ -3,8 +3,10 @@ package com.example.wishlist.dataPersistance
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import androidx.room.Dao
 import com.example.wishlist.model.Wishlist
 
+@Dao
 interface WishlistDao {
 
     fun getAll(): LiveData<List<Wishlist>>
