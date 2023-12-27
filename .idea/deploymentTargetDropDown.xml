@@ -14,13 +14,13 @@
       <entry key="getAllReturnsEmptyList()">
         <State />
       </entry>
-      <entry key="getWishListCallsDatabase()">
-        <State />
-      </entry>
       <entry key="getWishListReturnsCorrectData()">
         <State />
       </entry>
       <entry key="mockito">
+        <State />
+      </entry>
+      <entry key="saveWishlistsSavesData()">
         <State />
       </entry>
       <entry key="wishlist">
