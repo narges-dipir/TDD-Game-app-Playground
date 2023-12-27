@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.room.Dao
+import androidx.room.Query
 import com.example.wishlist.model.Wishlist
 
 @Dao
 interface WishlistDao {
 
+    @Query("SELECT * FROM wishlist")
     fun getAll(): LiveData<List<Wishlist>>
 
     fun findById(id: Int): LiveData<Wishlist>
