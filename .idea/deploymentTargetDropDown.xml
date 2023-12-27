@@ -11,10 +11,10 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="getAllReturnsEmptyList()">
+      <entry key="getAllRetrievesData()">
         <State />
       </entry>
-      <entry key="getWishListReturnsCorrectData()">
+      <entry key="getAllReturnsEmptyList()">
         <State />
       </entry>
       <entry key="mockito">
