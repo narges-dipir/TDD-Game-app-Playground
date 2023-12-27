@@ -12,10 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
@@ -40,10 +42,29 @@ class WishlistDaoTest {
 
     @Test
     fun getAllReturnsEmptyList() = runTest {
-        val testObserver: Observer<List<Wishlist>> = mock()
         runBlocking(Dispatchers.Main) {
+            val testObserver: Observer<List<Wishlist>> = mock()
             wishlistDao.getAll().observeForever(testObserver)
             verify(testObserver).onChanged(emptyList())
+        }
+    }
+
+    @Test
+    fun saveWishlistsSavesData() = runTest {
+        val wishItem1 = Wishlist("Victoria", listOf(), 1)
+        val wishItem2 = Wishlist("Tyler", listOf(), 2)
+        wishlistDao.save(wishItem1, wishItem2)
+
+        runBlocking(Dispatchers.Main) {
+            val testObserver: Observer<List<Wishlist>> = mock()
+            wishlistDao.getAll().observeForever(testObserver)
+
+            val listClass = ArrayList::class.java as Class<ArrayList<Wishlist>>
+            val argumentCaptor = ArgumentCaptor.forClass(listClass)
+
+            verify(testObserver).onChanged(argumentCaptor.capture())
+
+            Assert.assertTrue(argumentCaptor.value.size > 0)
         }
     }
 

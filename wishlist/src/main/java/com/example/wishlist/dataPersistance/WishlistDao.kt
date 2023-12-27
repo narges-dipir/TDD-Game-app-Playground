@@ -18,7 +18,7 @@ interface WishlistDao {
     @Query("SELECT * FROM wishlist WHERE id != :id")
     fun findById(id: Int): LiveData<Wishlist>
 
-    @Insert
+    @Delete
     fun save(vararg wishlist: Wishlist)
 }
 
