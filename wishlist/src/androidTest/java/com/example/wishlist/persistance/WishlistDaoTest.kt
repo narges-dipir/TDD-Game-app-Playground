@@ -9,6 +9,7 @@ import com.example.wishlist.dataPersistance.WishlistDao
 import com.example.wishlist.dataPersistance.WishlistDatabase
 import com.example.wishlist.model.Wishlist
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -42,9 +43,10 @@ class WishlistDaoTest {
 
     @Test
     fun getAllReturnsEmptyList() = runTest {
+        val testObserver: Observer<List<Wishlist>> = mock()
         runBlocking(Dispatchers.Main) {
-            val testObserver: Observer<List<Wishlist>> = mock()
             wishlistDao.getAll().observeForever(testObserver)
+            delay(1000)
             verify(testObserver).onChanged(emptyList())
         }
     }
@@ -61,7 +63,6 @@ class WishlistDaoTest {
 
             val listClass = ArrayList::class.java as Class<ArrayList<Wishlist>>
             val argumentCaptor = ArgumentCaptor.forClass(listClass)
-
             verify(testObserver).onChanged(argumentCaptor.capture())
 
             Assert.assertTrue(argumentCaptor.value.size > 0)

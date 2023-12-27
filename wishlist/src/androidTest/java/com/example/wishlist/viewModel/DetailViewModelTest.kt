@@ -2,9 +2,12 @@ package com.example.wishlist.viewModel
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import com.example.wishlist.dataPersistance.RepositoryImpl
 import com.example.wishlist.dataPersistance.WishlistDao
 import com.example.wishlist.dataPersistance.WishlistDaoImpl
+import com.example.wishlist.dataPersistance.WishlistDatabase
 import com.example.wishlist.model.Wishlist
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -26,6 +29,15 @@ class DetailViewModelTest {
     private val wishlistDao: WishlistDao = Mockito.spy(WishlistDaoImpl())
     private val viewModel = DetailViewModel(RepositoryImpl(wishlistDao))
 
+//    private val wishlistDao: WishlistDao = Mockito.spy(
+//        Room.inMemoryDatabaseBuilder(
+//            ApplicationProvider.getApplicationContext(),
+//            WishlistDatabase::class.java,
+//        )
+//            .allowMainThreadQueries()
+//            .build()
+//            .wishListDao(),
+//    )
     @Test
     fun saveNewItemCallsDatabase() {
         val wishItem = Wishlist("Victoria", listOf("RW Android Apprentice book", "AndroidPhone"), 1)
