@@ -1,5 +1,6 @@
 package com.narcis.punchline.network
 
+import com.github.javafaker.Faker
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.narcis.punchline.Joke
 import com.narcis.punchline.JokeService
@@ -62,6 +63,23 @@ class JokeServiceTestMockingService {
         val joke = Joke(id, joke)
 
         whenever(jokeService.getRandomJoke()).thenReturn(Single.just(joke))
+        val testObserver = repository.getJoke().test()
+        testObserver.assertValue(joke)
+    }
+}
+class JokeServiceTestUsingFaker {
+    var faker = Faker()
+    private val jokeService: JokeService = mock()
+    private val repository = RepositoryImpl(jokeService)
+
+    @Test
+    fun `get random joke emits joke`() {
+        val joke = Joke(
+            faker.idNumber().valid(),
+            faker.lorem().sentence()
+        )
+        whenever(jokeService.getRandomJoke()).thenReturn(Single.just(joke))
+
         val testObserver = repository.getJoke().test()
         testObserver.assertValue(joke)
     }
