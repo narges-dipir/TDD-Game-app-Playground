@@ -9,6 +9,8 @@ import org.junit.Rule
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.test.assertEquals
+
 private const val id = "1"
 private const val joke = "how does a train eat? it goes chew, chew"
 class JokeServiceTestUsingWebServer {
@@ -34,5 +36,16 @@ class JokeServiceTestUsingWebServer {
         )
         val testObserver = jokeService.getRandomJoke().test()
         testObserver.assertValue(Joke(id, joke))
+    }
+
+    @Test
+    fun `get random joke gets random joke json`(){
+        mockWebServer.enqueue(
+            MockResponse().setBody(testJson).setResponseCode(200)
+        )
+
+        val testObserver = jokeService.getRandomJoke().test()
+        testObserver.assertNoErrors()
+        assertEquals("/random_joke.json", mockWebServer.takeRequest().path)
     }
 }
