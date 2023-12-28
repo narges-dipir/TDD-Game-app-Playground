@@ -31,7 +31,7 @@ class JokeServiceTestUsingWebServer {
         mockWebServer.enqueue(
             MockResponse().setBody(testJson).setResponseCode(200)
         )
-        val testObserver = jokeService.getRandomeJoke().test()
+        val testObserver = jokeService.getRandomJoke().test()
         testObserver.assertValue(Joke("1", "joke"))
     }
 }
