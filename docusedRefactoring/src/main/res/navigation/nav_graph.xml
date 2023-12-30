@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/randomCompanionFragment">
+
+  <fragment
+      android:id="@+id/randomCompanionFragment"
+      android:name="com.example.docusedrefactoring.randomcompanion.RandomCompanionFragment"
+      android:label="fragment_random_pet"
+      tools:layout="@layout/fragment_random_companion"/>
+  <fragment
+      android:id="@+id/searchForCompanionFragment"
+      android:name="com.example.docusedrefactoring.searchforcompanion.SearchForCompanionFragment"
+      android:label="fragment_search_for_pet"
+      tools:layout="@layout/fragment_search_for_companion"/>
+</navigation>

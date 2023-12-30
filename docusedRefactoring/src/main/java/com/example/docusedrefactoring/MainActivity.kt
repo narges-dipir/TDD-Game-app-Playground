@@ -39,6 +39,10 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    companion object {
+        val PETFINDER_URI = "petfinder_uri"
+        val PETFINDER_KEY = "petfinder_key"
+    }
 }
 
 @Composable
