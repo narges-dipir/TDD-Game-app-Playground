@@ -4,3 +4,9 @@
 
 ## app module
 we go around the unit testing and best practices to tackle unit testing
+
+## wishList module
+androidTest; persistance layer
+
+## punchline module
+integration test and network layer test
