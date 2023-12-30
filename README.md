@@ -10,3 +10,6 @@ androidTest; persistance layer
 
 ## punchline module
 integration test and network layer test
+
+## docusedRefactoring
+xml components refactoring -- depricated
