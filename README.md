@@ -2,5 +2,5 @@
 
 
 
-## in the first module 
+## app module
 we go around the unit testing and best practices to tackle unit testing
