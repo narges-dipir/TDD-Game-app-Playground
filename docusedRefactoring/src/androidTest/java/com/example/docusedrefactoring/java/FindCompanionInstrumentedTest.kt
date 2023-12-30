@@ -97,6 +97,12 @@ class FindCompanionInstrumentedTest {
   fun searching_for_a_companion_and_tapping_on_it_takes_the_user_to_the_companion_details() {
     find_and_select_kevin_in_30318()
     onView(withText("Rome, GA")).check(matches(isDisplayed()))
+
+    onView(withText("Domestic Short Hair")).check(matches(isDisplayed()))
+            onView(withText("Young")).check(matches(isDisplayed()))
+            onView(withText("Female")).check(matches(isDisplayed()))
+            onView(withText("Medium")).check(matches(isDisplayed()))
+            onView(withText("Meet KEVIN")).check(matches(isDisplayed()))
   }
 
   @Test
